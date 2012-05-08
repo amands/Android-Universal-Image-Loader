@@ -3,10 +3,6 @@ package com.nostra13.example.universalimageloader;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -33,21 +29,22 @@ public class HomeActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ac_home);
 
-		String[] heavyImages = getResources().getStringArray(R.array.heavy_images);
-		String[] lightImages = getResources().getStringArray(R.array.light_images);
+		// String[] heavyImages =
+		// getResources().getStringArray(R.array.heavy_images);
+		// String[] lightImages =
+		// getResources().getStringArray(R.array.light_images);
 
 		// imageUrls = new String[heavyImages.length + lightImages.length];
 		// List<String> urls = new ArrayList<String>();
 		// urls.addAll(Arrays.asList(heavyImages));
 		// urls.addAll(Arrays.asList(lightImages));
 		// imageUrls = (String[]) urls.toArray(new String[0]);
-		
+
 		dialog = ProgressDialog.show(this, "Loading Images From Server....", "Please wait",
 				true, false);
-		
+
 		new GetData().execute(""); // GetUserStatus();
-		
-		
+
 	}
 
 	public void onImageListClick(View view) {
@@ -73,13 +70,12 @@ public class HomeActivity extends BaseActivity {
 		intent.putExtra(Extra.IMAGES, imageUrls);
 		startActivity(intent);
 	}
-	
-	
+
 	public class GetData extends AsyncTask<String, Integer, String> {
 
 		String result;
 		JSONArray array;
-		
+
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -107,8 +103,7 @@ public class HomeActivity extends BaseActivity {
 				}
 				is.close();
 				System.out.println("Output::" + sb.toString());
-				if (!(sb.toString())
-						.equals("[Form not submitted]")) {
+				if (!(sb.toString()).equals("[Form not submitted]")) {
 					array = new JSONArray(sb.toString());
 					imageUrls = new String[array.length()];
 					for (int i = 0; i < array.length(); i++) {
@@ -133,13 +128,10 @@ public class HomeActivity extends BaseActivity {
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
-			
+
 			dialog.dismiss();
 
 		}
 	}
-	
-	
-	
-	
+
 }
