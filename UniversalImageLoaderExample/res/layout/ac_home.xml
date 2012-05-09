@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,21 +26,23 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_margin="20dip"
         android:background="@drawable/overlay_button"
         android:onClick="onImageGridClick"
         android:text="@string/button_image_grid"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
 
     <Button
         android:layout_width="fill_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_margin="20dip"
         android:background="@drawable/overlay_button"
         android:onClick="onImagePagerClick"
         android:text="@string/button_image_pager"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
 
     <Button
         android:layout_width="fill_parent"
