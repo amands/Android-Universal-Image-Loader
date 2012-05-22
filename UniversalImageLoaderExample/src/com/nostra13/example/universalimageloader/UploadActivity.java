@@ -19,6 +19,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,7 +36,10 @@ import com.google.ads.AdView;
 
 public class UploadActivity extends Activity {
 	Button Upload;
+
+	private static final int PICK_FROM_CAMERA = 1;
 	private static final int PICK_FROM_FILE = 2;
+
 	private ProgressDialog dialog;
 	private String path = "";
 	// private SQLiteAdapter mySQLiteAdapter;
@@ -69,7 +73,7 @@ public class UploadActivity extends Activity {
 			}
 		});
 
-		final String[] items = new String[] { "From SD Card" };
+		final String[] items = new String[] { "Pick from Camera", "From SD Card" };
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.select_dialog_item, items);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -77,11 +81,30 @@ public class UploadActivity extends Activity {
 		builder.setTitle("Select Image");
 		builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int item) {
-				Intent intent = new Intent();
-				intent.setType("image/*");
-				intent.setAction(Intent.ACTION_GET_CONTENT);
-				startActivityForResult(Intent.createChooser(intent, "Complete action using"),
-						PICK_FROM_FILE);
+
+				if (item == 0) {
+					Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+					File file = new File(Environment.getExternalStorageDirectory(), "tmp_avatar_"
+							+ String.valueOf(System.currentTimeMillis()) + ".jpg");
+					mImageCaptureUri = Uri.fromFile(file);
+
+					try {
+						intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
+						intent.putExtra("return-data", true);
+
+						startActivityForResult(intent, PICK_FROM_CAMERA);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+					dialog.cancel();
+				} else {
+					Intent intent = new Intent();
+					intent.setType("image/*");
+					intent.setAction(Intent.ACTION_GET_CONTENT);
+					startActivityForResult(Intent.createChooser(intent, "Complete action using"),
+							PICK_FROM_FILE);
+				}
 			}
 		});
 

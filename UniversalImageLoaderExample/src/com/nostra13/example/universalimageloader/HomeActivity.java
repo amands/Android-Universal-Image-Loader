@@ -36,7 +36,7 @@ public class HomeActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ac_home);
-		
+
 		/* AdMob Start */
 		AdView adView = new AdView(this, AdSize.BANNER, Extra.MY_AD_UNIT_ID);
 		LinearLayout layout = (LinearLayout) findViewById(R.id.llHomeAd);

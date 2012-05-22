@@ -27,25 +27,39 @@
         </activity>
         <activity
             android:name=".ImageListActivity"
-            android:label="@string/ac_name_image_list" />
+            android:label="@string/ac_name_image_list"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity
             android:name=".ImageGridActivity"
-            android:label="@string/ac_name_image_grid" />
+            android:label="@string/ac_name_image_grid"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity
             android:name=".ImagePagerActivity"
-            android:label="@string/ac_name_image_pager" />
+            android:label="@string/ac_name_image_pager"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity
             android:name=".ImageGalleryActivity"
-            android:label="@string/ac_name_image_gallery" />
+            android:label="@string/ac_name_image_gallery"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity
             android:name=".UploadActivity"
-            android:label="@string/ac_name_image_gallery" />
+            android:label="@string/ac_name_image_gallery"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity
             android:name=".JokeActivity"
-            android:label="@string/ac_name_image_gallery" />
+            android:label="@string/ac_name_image_gallery"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity
             android:name=".UploadJokeActivity"
-            android:label="@string/ac_name_image_gallery" />
+            android:label="@string/ac_name_image_gallery"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity
             android:name="com.google.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
