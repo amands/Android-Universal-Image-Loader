@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Activity titles -->
-    <string name="app_name">UniversalImageLoader</string>
+    <string name="app_name">So Funny</string>
     <string name="ac_name_image_list">Image List Example</string>
     <string name="ac_name_image_grid">Image Grid Example</string>
     <string name="ac_name_image_pager">Image Pager Example</string>
@@ -15,5 +15,18 @@
     <string name="button_image_grid">Image Grid</string>
     <string name="button_image_pager">Image Pager</string>
     <string name="button_image_gallery">Image Gallery</string>
+    <string name="button_funny_pics">Funny Pictures</string>
+    <string name="button_jokes">Jokes</string>
+    <string name="next">Next > </string>
+    <string name="upload_image">Upload Image</string>
+    <string name="previous">&lt; Previous</string>
+    <string name="back">Back</string>
+    <string name="publish">Publish</string>
+    <string name="save">Save</string>
+    <string name="browse">Click on Image to browse</string>
+    <string name="add_joke">Add Joke</string>
+    <string name="upload">Upload</string>
+    <string name="share">Share</string>
+    <string name="write_joke">Write Joke in Below Box</string>
 
 </resources>

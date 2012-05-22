@@ -17,24 +17,17 @@
         android:textSize="24dip" />
 
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dip"
-        android:onClick="onImageListClick"
-        android:text="@string/button_image_list"
-        android:visibility="gone" />
-
-    <Button
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="20dip"
         android:background="@drawable/overlay_button"
         android:onClick="onImageGridClick"
-        android:text="@string/button_image_grid"
+        android:text="@string/button_funny_pics"
         android:textColor="#ffffff"
         android:textSize="20dp" />
 
-    <Button
+    <!--
+         Button
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_margin="20dip"
@@ -42,14 +35,28 @@
         android:onClick="onImagePagerClick"
         android:text="@string/button_image_pager"
         android:textColor="#ffffff"
-        android:textSize="20dp" />
+        android:textSize="20dp" /
+    -->
 
     <Button
+        android:id="@+id/btnAhJokes"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dip"
-        android:onClick="onImageGalleryClick"
-        android:text="@string/button_image_gallery"
-        android:visibility="gone" />
+        android:layout_height="40dp"
+        android:layout_margin="20dip"
+        android:background="@drawable/overlay_button"
+        android:onClick="onImagePagerClick"
+        android:text="@string/button_jokes"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
+
+    <LinearLayout
+        android:id="@+id/llHomeAd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="100dp"
+        android:background="#ff2222"
+        android:orientation="vertical" >
+    </LinearLayout>
 
 </LinearLayout>

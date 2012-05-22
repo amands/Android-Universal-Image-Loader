@@ -1,5 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pager"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" />
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="fill_parent"
+        android:layout_height="301dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="-10dp"
+        android:layout_weight="0.36" >
+
+        <Button
+            android:id="@+id/btnIpBack"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/overlay_button"
+            android:text="@string/back"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btnIpPublish"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/overlay_button"
+            android:text="@string/publish"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btnIpSave"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/overlay_button"
+            android:text="@string/save"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="88dp" >
+
+        <Button
+            android:id="@+id/btnIpPrev"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/overlay_button"
+            android:text="@string/previous"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btnIpNext"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/overlay_button"
+            android:text="@string/next"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llIpAd"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="bottom"
+        android:background="#ff2222"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</LinearLayout>

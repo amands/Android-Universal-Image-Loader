@@ -10,6 +10,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".UILApplication"
@@ -36,6 +37,18 @@
         <activity
             android:name=".ImageGalleryActivity"
             android:label="@string/ac_name_image_gallery" />
+        <activity
+            android:name=".UploadActivity"
+            android:label="@string/ac_name_image_gallery" />
+        <activity
+            android:name=".JokeActivity"
+            android:label="@string/ac_name_image_gallery" />
+        <activity
+            android:name=".UploadJokeActivity"
+            android:label="@string/ac_name_image_gallery" />
+        <activity
+            android:name="com.google.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
     </application>
 
 </manifest>
