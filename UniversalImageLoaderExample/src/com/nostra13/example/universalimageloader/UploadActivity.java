@@ -302,6 +302,7 @@ public class UploadActivity extends Activity {
 			System.out.println("Result from server::" + inputLine);
 
 			startActivity(new Intent(UploadActivity.this, ImageGridActivity.class));
+			finish();
 
 		}
 

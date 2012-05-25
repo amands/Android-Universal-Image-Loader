@@ -3,19 +3,20 @@ package com.nostra13.example.universalimageloader;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
+import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 
 public class UploadJokeActivity extends Activity {
 
@@ -36,7 +41,7 @@ public class UploadJokeActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.upload_joke);
-		
+
 		/* AdMob Start */
 		AdView adView = new AdView(this, AdSize.BANNER, Extra.MY_AD_UNIT_ID);
 		LinearLayout layout = (LinearLayout) findViewById(R.id.llUjAd);
@@ -68,13 +73,20 @@ public class UploadJokeActivity extends Activity {
 
 		@Override
 		protected String doInBackground(String... params) {
-			String url = Extra.url + "addJoke.php?do=submit&joke="
-					+ etJoke.getText().toString();
+			String url = Extra.url + "addJoke.php";
 			System.out.println("Splash screen URL::" + url);
 			try {
+				HttpPost httppost = new HttpPost(url);
 				HttpClient httpclient = new DefaultHttpClient();
-				HttpGet httpget = new HttpGet(url.replace(" ", "%20"));
-				HttpResponse response = httpclient.execute(httpget);
+
+				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+				// Adding parameters to send to the HTTP server.
+				nameValuePairs.add(new BasicNameValuePair("do", "submit"));
+				nameValuePairs.add(new BasicNameValuePair("joke", etJoke.getText().toString()));
+
+				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+				HttpResponse response = httpclient.execute(httppost);
+
 				HttpEntity entity = response.getEntity();
 				InputStream is = entity.getContent();
 
@@ -106,7 +118,7 @@ public class UploadJokeActivity extends Activity {
 					Toast.LENGTH_SHORT).show();
 			dialog.dismiss();
 
-			startActivity(new Intent(UploadJokeActivity.this, HomeActivity.class));
+			finish();
 
 		}
 

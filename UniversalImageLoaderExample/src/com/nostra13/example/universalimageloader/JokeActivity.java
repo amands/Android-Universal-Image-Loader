@@ -34,6 +34,8 @@ public class JokeActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		System.out.println("JokeActivity.onCreate()");
 
 		setContentView(R.layout.joke_view);
 		

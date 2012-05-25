@@ -10,8 +10,14 @@
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/joke"
+        android:drawableRight="@drawable/joke"
+       android:drawableTop="@drawable/joke"
+       android:drawableBottom="@drawable/joke"
         android:paddingBottom="20dip"
         android:paddingLeft="10dip"
+        android:textStyle="bold"
+        android:textColor="#c8ff8080"
         android:paddingTop="20dip"
         android:text="@string/label_activity_examples"
         android:textSize="24dip" />
@@ -35,7 +41,7 @@
         android:onClick="onImagePagerClick"
         android:text="@string/button_image_pager"
         android:textColor="#ffffff"
-        android:textSize="20dp" /
+        android:textSize="20dp" /
     -->
 
     <Button
