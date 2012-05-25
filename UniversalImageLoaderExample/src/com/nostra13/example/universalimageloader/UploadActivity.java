@@ -4,9 +4,17 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -237,6 +245,7 @@ public class UploadActivity extends Activity {
 				fileInputStream.close();
 				outputStream.flush();
 				outputStream.close();
+
 			} catch (Exception ex) {
 				// Exception handling
 			}
@@ -251,12 +260,48 @@ public class UploadActivity extends Activity {
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
+			
+			
+			String url = Extra.url + "getImages.php?do=submit";
+			System.out.println("Splash screen URL::" + url);
+			try {
+				HttpClient httpclient = new DefaultHttpClient();
+				HttpGet httpget = new HttpGet(url);
+				HttpResponse response = httpclient.execute(httpget);
+				HttpEntity entity = response.getEntity();
+				InputStream is = entity.getContent();
+
+				BufferedReader reader = new BufferedReader(
+						new InputStreamReader(is, "iso-8859-1"), 8);
+				StringBuilder sb = new StringBuilder();
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					sb.append(line);
+				}
+				is.close();
+				System.out.println("Output::" + sb.toString());
+				if (!(sb.toString()).equals("[Form not submitted]")) {
+					JSONArray array = new JSONArray(sb.toString());
+					Extra.imageUrls = new String[array.length()];
+					for (int i = 0; i < array.length(); i++) {
+						Extra.imageUrls[i] = array.getString(i);
+					}
+				} else {
+					System.out.println("Phone is not registered");
+				}
+
+			} catch (Exception e) {
+				System.out.println("In Catch ");
+				e.printStackTrace();
+			}
+			
+			
 			Toast.makeText(UploadActivity.this, "Image Added Successfully.....",
 					Toast.LENGTH_SHORT).show();
 			dialog.dismiss();
 			System.out.println("Result from server::" + inputLine);
 
-			startActivity(new Intent(UploadActivity.this, HomeActivity.class));
+			startActivity(new Intent(UploadActivity.this, ImageGridActivity.class));
 
 		}
 

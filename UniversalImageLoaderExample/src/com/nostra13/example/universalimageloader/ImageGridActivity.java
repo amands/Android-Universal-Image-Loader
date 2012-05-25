@@ -1,6 +1,8 @@
 package com.nostra13.example.universalimageloader;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,12 +31,13 @@ public class ImageGridActivity extends BaseActivity implements OnClickListener {
 	private Button btnNext, btnPrev, btnUpload;
 	private GridView gridView;
 
-	private String[] imageUrls;
 	private String[] showUrls;
 
 	private int pos = 1;
 
 	private DisplayImageOptions options;
+	
+	private SharedPreferences settings;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,13 +55,14 @@ public class ImageGridActivity extends BaseActivity implements OnClickListener {
 		btnPrev = (Button) findViewById(R.id.btnIgPrev);
 		btnUpload = (Button) findViewById(R.id.btnIgUpload);
 
-		Bundle bundle = getIntent().getExtras();
-		imageUrls = bundle.getStringArray(Extra.IMAGES);
 		showUrls = new String[maxImages];
+		
+		settings = getPreferences(0);
+		pos = settings.getInt("pos", 1);
 
 		for (int i = (pos - 1) * maxImages, j = 0; i < maxImages * pos; i++, j++) {
 			try {
-				showUrls[j] = imageUrls[i];
+				showUrls[j] = Extra.imageUrls[i];
 			} catch (Exception e) {
 				showUrls[j] = "";
 			}
@@ -121,7 +125,7 @@ public class ImageGridActivity extends BaseActivity implements OnClickListener {
 
 			imageLoader.displayImage(showUrls[position], imageView, options);
 
-			System.out.println(position + ":Image::" + imageUrls[position]);
+			System.out.println(position + ":Image::" + Extra.imageUrls[position]);
 			return imageView;
 		}
 	}
@@ -132,12 +136,12 @@ public class ImageGridActivity extends BaseActivity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.btnIgNext:
 
-			if (imageUrls.length > (maxImages * pos))
+			if (Extra.imageUrls.length > (maxImages * pos))
 				pos++;
 
 			for (int i = (pos - 1) * maxImages, j = 0; i < maxImages * pos; i++, j++) {
 				try {
-					showUrls[j] = imageUrls[i];
+					showUrls[j] = Extra.imageUrls[i];
 				} catch (Exception e) {
 					showUrls[j] = "";
 				}
@@ -152,7 +156,7 @@ public class ImageGridActivity extends BaseActivity implements OnClickListener {
 
 			for (int i = (pos - 1) * maxImages, j = 0; i < maxImages * pos; i++, j++) {
 				try {
-					showUrls[j] = imageUrls[i];
+					showUrls[j] = Extra.imageUrls[i];
 				} catch (Exception e) {
 					showUrls[j] = "";
 				}
@@ -160,9 +164,16 @@ public class ImageGridActivity extends BaseActivity implements OnClickListener {
 			gridView.setAdapter(new ImageAdapter());
 			break;
 		case R.id.btnIgUpload:
-			startActivity(new Intent(ImageGridActivity.this, UploadActivity.class));
+			Editor editor = settings.edit();
+			editor.putInt("pos", pos);
+			editor.commit();
+			
+			Intent intent = new Intent(ImageGridActivity.this, UploadActivity.class);
+			startActivity(intent);
 			break;
 		}
 
 	}
+	
+	
 }

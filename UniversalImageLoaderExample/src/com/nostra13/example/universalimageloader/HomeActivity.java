@@ -29,7 +29,6 @@ import com.google.ads.AdView;
  */
 public class HomeActivity extends BaseActivity {
 
-	private String[] imageUrls;
 	private ProgressDialog dialog;
 
 	@Override
@@ -54,7 +53,6 @@ public class HomeActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(HomeActivity.this, JokeActivity.class);
-				intent.putExtra(Extra.IMAGES, imageUrls);
 				startActivity(intent);
 			}
 		});
@@ -63,7 +61,6 @@ public class HomeActivity extends BaseActivity {
 
 	public void onImageGridClick(View view) {
 		Intent intent = new Intent(this, ImageGridActivity.class);
-		intent.putExtra(Extra.IMAGES, imageUrls);
 		startActivity(intent);
 	}
 
@@ -101,14 +98,14 @@ public class HomeActivity extends BaseActivity {
 				System.out.println("Output::" + sb.toString());
 				if (!(sb.toString()).equals("[Form not submitted]")) {
 					array = new JSONArray(sb.toString());
-					imageUrls = new String[array.length()];
+					Extra.imageUrls = new String[array.length()];
 					for (int i = 0; i < array.length(); i++) {
-						imageUrls[i] = array.getString(i);
+						Extra.imageUrls[i] = array.getString(i);
 					}
 				} else {
 					System.out.println("Phone is not registered");
 				}
-
+				
 			} catch (Exception e) {
 				System.out.println("In Catch ");
 				e.printStackTrace();

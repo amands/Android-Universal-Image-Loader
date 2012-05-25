@@ -18,8 +18,6 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
  */
 public class ImageListActivity extends BaseActivity {
 
-	private String[] imageUrls;
-
 	private DisplayImageOptions options;
 
 	@Override
@@ -27,14 +25,8 @@ public class ImageListActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ac_image_list);
 
-		Bundle bundle = getIntent().getExtras();
-		imageUrls = bundle.getStringArray(Extra.IMAGES);
-
-		options = new DisplayImageOptions.Builder()
-			.showStubImage(R.drawable.stub_image)
-			.cacheInMemory()
-			.cacheOnDisc()
-			.build();
+		options = new DisplayImageOptions.Builder().showStubImage(R.drawable.stub_image)
+				.cacheInMemory().cacheOnDisc().build();
 
 		ListView listView = (ListView) findViewById(android.R.id.list);
 		listView.setAdapter(new ItemAdapter());
@@ -54,7 +46,7 @@ public class ImageListActivity extends BaseActivity {
 
 	private void startImageGalleryActivity(int position) {
 		Intent intent = new Intent(this, ImagePagerActivity.class);
-		intent.putExtra(Extra.IMAGES, imageUrls);
+		intent.putExtra(Extra.IMAGES, Extra.imageUrls);
 		intent.putExtra(Extra.IMAGE_POSITION, position);
 		startActivity(intent);
 	}
@@ -68,7 +60,7 @@ public class ImageListActivity extends BaseActivity {
 
 		@Override
 		public int getCount() {
-			return imageUrls.length;
+			return Extra.imageUrls.length;
 		}
 
 		@Override
@@ -96,7 +88,7 @@ public class ImageListActivity extends BaseActivity {
 
 			holder.text.setText("Item " + position);
 
-			imageLoader.displayImage(imageUrls[position], holder.image, options);
+			imageLoader.displayImage(Extra.imageUrls[position], holder.image, options);
 
 			return view;
 		}
