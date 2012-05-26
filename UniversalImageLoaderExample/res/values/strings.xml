@@ -17,9 +17,9 @@
     <string name="button_image_gallery">Image Gallery</string>
     <string name="button_funny_pics">Funny Pictures</string>
     <string name="button_jokes">Jokes</string>
-    <string name="next">Next > </string>
+    <string name="next">Next >> </string>
     <string name="upload_image">Upload Image</string>
-    <string name="previous">&lt; Previous</string>
+    <string name="previous">&lt;&lt; Prev</string>
     <string name="back">Back</string>
     <string name="publish">Publish</string>
     <string name="save">Save</string>

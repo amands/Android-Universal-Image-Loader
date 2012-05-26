@@ -9,6 +9,7 @@
         android:id="@+id/gridview"
         android:layout_width="fill_parent"
         android:layout_height="310dp"
+        android:layout_weight="2"
         android:columnWidth="90dp"
         android:gravity="center"
         android:horizontalSpacing="10dp"
@@ -19,47 +20,48 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="68dp"
+        android:layout_weight="1"
         android:baselineAligned="false" >
 
-        <Button
+        <ImageButton
             android:id="@+id/btnIgPrev"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/overlay_button"
+            android:src="@drawable/prev"
             android:text="@string/previous"
             android:textColor="#ffffff" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnIgUpload"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/overlay_button"
+            android:src="@drawable/upload"
             android:text="@string/upload_image"
             android:textColor="#ffffff" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnIgNext"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/overlay_button"
+            android:src="@drawable/next"
             android:text="@string/next"
             android:textColor="#ffffff" />
     </LinearLayout>
 
-     <LinearLayout
+    <LinearLayout
         android:id="@+id/llIgAd"
-        android:background="#ff2222"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:background="#ff2222"
         android:orientation="vertical" >
     </LinearLayout>
-
 
 </LinearLayout>

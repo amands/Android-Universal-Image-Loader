@@ -37,6 +37,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/overlay_button"
         android:text="@string/upload"
+        android:textStyle="bold"
         android:textColor="#ffffff" />
 
      <LinearLayout

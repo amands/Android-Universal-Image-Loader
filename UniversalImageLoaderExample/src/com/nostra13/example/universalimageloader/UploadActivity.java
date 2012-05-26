@@ -43,7 +43,7 @@ import com.google.ads.AdSize;
 import com.google.ads.AdView;
 
 public class UploadActivity extends Activity {
-	Button Upload;
+	private Button Upload;
 
 	private static final int PICK_FROM_CAMERA = 1;
 	private static final int PICK_FROM_FILE = 2;
@@ -260,8 +260,7 @@ public class UploadActivity extends Activity {
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
-			
-			
+
 			String url = Extra.url + "getImages.php?do=submit";
 			System.out.println("Splash screen URL::" + url);
 			try {
@@ -294,8 +293,7 @@ public class UploadActivity extends Activity {
 				System.out.println("In Catch ");
 				e.printStackTrace();
 			}
-			
-			
+
 			Toast.makeText(UploadActivity.this, "Image Added Successfully.....",
 					Toast.LENGTH_SHORT).show();
 			dialog.dismiss();

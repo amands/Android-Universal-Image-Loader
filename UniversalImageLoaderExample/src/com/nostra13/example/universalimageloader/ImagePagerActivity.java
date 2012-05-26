@@ -23,8 +23,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -43,7 +43,7 @@ import com.nostra13.universalimageloader.core.ImageLoadingListener;
 public class ImagePagerActivity extends BaseActivity implements OnClickListener {
 
 	private ViewPager pager;
-	private Button btnBack, btnPublish, btnSave, btnNext, btnPrev;
+	private ImageButton btnBack, btnPublish, btnSave, btnNext, btnPrev;
 	private Bitmap bmImg;
 	private int pagerPosition;
 	private String[] imageUrls;
@@ -54,7 +54,7 @@ public class ImagePagerActivity extends BaseActivity implements OnClickListener 
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.ac_image_pager);
-		
+
 		/* AdMob Start */
 		AdView adView = new AdView(this, AdSize.BANNER, Extra.MY_AD_UNIT_ID);
 		LinearLayout layout = (LinearLayout) findViewById(R.id.llIpAd);
@@ -62,11 +62,11 @@ public class ImagePagerActivity extends BaseActivity implements OnClickListener 
 		adView.loadAd(new AdRequest());
 		/* AdMob End */
 
-		btnBack = (Button) findViewById(R.id.btnIpBack);
-		btnPublish = (Button) findViewById(R.id.btnIpPublish);
-		btnSave = (Button) findViewById(R.id.btnIpSave);
-		btnNext = (Button) findViewById(R.id.btnIpNext);
-		btnPrev = (Button) findViewById(R.id.btnIpPrev);
+		btnBack = (ImageButton) findViewById(R.id.btnIpBack);
+		btnPublish = (ImageButton) findViewById(R.id.btnIpPublish);
+		btnSave = (ImageButton) findViewById(R.id.btnIpSave);
+		btnNext = (ImageButton) findViewById(R.id.btnIpNext);
+		btnPrev = (ImageButton) findViewById(R.id.btnIpPrev);
 
 		btnBack.setOnClickListener(this);
 		btnPublish.setOnClickListener(this);
@@ -237,7 +237,7 @@ public class ImagePagerActivity extends BaseActivity implements OnClickListener 
 			pager.setAdapter(new ImagePagerAdapter(imageUrls));
 			System.out.println(pagerPosition + ":+:"
 					+ (pagerPosition >= imageUrls.length - 1 ? pagerPosition : pagerPosition + 1));
-			
+
 			pager.setCurrentItem(pagerPosition >= imageUrls.length - 1 ? pagerPosition
 					: ++pagerPosition);
 			break;

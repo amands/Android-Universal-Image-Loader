@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -28,7 +28,7 @@ public class ImageGridActivity extends BaseActivity implements OnClickListener {
 
 	private static final int maxImages = 9;
 
-	private Button btnNext, btnPrev, btnUpload;
+	private ImageButton btnNext, btnPrev, btnUpload;
 	private GridView gridView;
 
 	private String[] showUrls;
@@ -51,9 +51,9 @@ public class ImageGridActivity extends BaseActivity implements OnClickListener {
 		adView.loadAd(new AdRequest());
 		/* AdMob End */
 
-		btnNext = (Button) findViewById(R.id.btnIgNext);
-		btnPrev = (Button) findViewById(R.id.btnIgPrev);
-		btnUpload = (Button) findViewById(R.id.btnIgUpload);
+		btnNext = (ImageButton) findViewById(R.id.btnIgNext);
+		btnPrev = (ImageButton) findViewById(R.id.btnIgPrev);
+		btnUpload = (ImageButton) findViewById(R.id.btnIgUpload);
 
 		showUrls = new String[maxImages];
 		

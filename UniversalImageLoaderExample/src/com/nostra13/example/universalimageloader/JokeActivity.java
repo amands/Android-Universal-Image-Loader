@@ -16,7 +16,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,7 +26,7 @@ import com.google.ads.AdView;
 
 public class JokeActivity extends Activity implements OnClickListener {
 
-	private Button btnNext, btnPrev, btnShare, btnAdd;
+	private ImageButton btnNext, btnPrev, btnShare, btnAdd;
 	private static TextView tvJoke;
 	private int totalJoke = 10, cJoke = 0;
 	private String joke;
@@ -34,11 +34,11 @@ public class JokeActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		System.out.println("JokeActivity.onCreate()");
 
 		setContentView(R.layout.joke_view);
-		
+
 		/* AdMob Start */
 		AdView adView = new AdView(this, AdSize.BANNER, Extra.MY_AD_UNIT_ID);
 		LinearLayout layout = (LinearLayout) findViewById(R.id.llJvAd);
@@ -46,10 +46,10 @@ public class JokeActivity extends Activity implements OnClickListener {
 		adView.loadAd(new AdRequest());
 		/* AdMob End */
 
-		btnNext = (Button) findViewById(R.id.btnJvNext);
-		btnPrev = (Button) findViewById(R.id.btnJvPrev);
-		btnShare = (Button) findViewById(R.id.btnJvShare);
-		btnAdd = (Button) findViewById(R.id.btnJvAdd);
+		btnNext = (ImageButton) findViewById(R.id.btnJvNext);
+		btnPrev = (ImageButton) findViewById(R.id.btnJvPrev);
+		btnShare = (ImageButton) findViewById(R.id.btnJvShare);
+		btnAdd = (ImageButton) findViewById(R.id.btnJvAdd);
 
 		tvJoke = (TextView) findViewById(R.id.tvJvJoke);
 

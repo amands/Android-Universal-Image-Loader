@@ -7,7 +7,7 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.00"
         android:gravity="center"
         android:padding="20dp" >
 
@@ -20,63 +20,58 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_weight="0.05"
         android:baselineAligned="false" >
 
-        <Button
+        <ImageButton
             android:id="@+id/btnJvPrev"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/overlay_button"
+            android:src="@drawable/prev"
             android:text="@string/previous"
             android:textColor="#ffffff" />
 
-        <Button
+        <ImageButton
+            android:id="@+id/btnJvShare"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/overlay_button"
+            android:src="@drawable/share"
+            android:text="@string/share"
+            android:textColor="#ffffff" />
+
+        <ImageButton
+            android:id="@+id/btnJvAdd"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/overlay_button"
+            android:src="@drawable/upload"
+            android:text="@string/add_joke"
+            android:textColor="#ffffff" />
+
+        <ImageButton
             android:id="@+id/btnJvNext"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/overlay_button"
+            android:src="@drawable/next"
             android:text="@string/next"
             android:textColor="#ffffff" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:baselineAligned="false" >
-
-        <Button
-            android:id="@+id/btnJvShare"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/overlay_button"
-            android:text="@string/share"
-            android:textColor="#ffffff" />
-
-        <Button
-            android:id="@+id/btnJvAdd"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/overlay_button"
-            android:text="@string/add_joke"
-            android:textColor="#ffffff" />
-    </LinearLayout>
-
-     <LinearLayout
         android:id="@+id/llJvAd"
-        android:background="#ff2222"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
+        android:layout_weight="0.01"
+        android:background="#ff2222"
         android:orientation="vertical" >
     </LinearLayout>
-
 
 </LinearLayout>
