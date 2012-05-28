@@ -74,7 +74,6 @@ public class UploadJokeActivity extends Activity {
 		@Override
 		protected String doInBackground(String... params) {
 			String url = Extra.url + "addJoke.php";
-			System.out.println("Splash screen URL::" + url);
 			try {
 				HttpPost httppost = new HttpPost(url);
 				HttpClient httpclient = new DefaultHttpClient();
@@ -98,9 +97,7 @@ public class UploadJokeActivity extends Activity {
 					sb.append(line);
 				}
 				is.close();
-				System.out.println("Output::" + sb.toString());
 			} catch (Exception e) {
-				System.out.println("In Catch ");
 				e.printStackTrace();
 			}
 			return "";

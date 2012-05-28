@@ -28,14 +28,12 @@ public class JokeActivity extends Activity implements OnClickListener {
 
 	private ImageButton btnNext, btnPrev, btnShare, btnAdd;
 	private static TextView tvJoke;
-	private int totalJoke = 10, cJoke = 0;
+	private int totalJoke = 10;
 	private String joke;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		System.out.println("JokeActivity.onCreate()");
 
 		setContentView(R.layout.joke_view);
 
@@ -67,19 +65,16 @@ public class JokeActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		System.out.println("JokeActivity.onClick()");
 		switch (v.getId()) {
 		case R.id.btnJvNext:
-			System.out.println(totalJoke + "NExt" + cJoke);
-			if (cJoke < totalJoke) {
-				cJoke++;
+			if (Extra.cJoke < totalJoke) {
+				Extra.cJoke++;
 				tvJoke.setText(getJoke("inc"));
 			}
 			break;
 		case R.id.btnJvPrev:
-			System.out.println(totalJoke + "prev" + cJoke);
-			if (cJoke > 1) {
-				cJoke--;
+			if (Extra.cJoke > 1) {
+				Extra.cJoke--;
 				tvJoke.setText(getJoke("dec"));
 			}
 			break;
@@ -102,8 +97,7 @@ public class JokeActivity extends Activity implements OnClickListener {
 
 	public String getJoke(String type) {
 		JSONArray array;
-		String url = Extra.url + "getJoke.php?do=submit&num=" + cJoke + "&type=" + type;
-		System.out.println("URL::" + url);
+		String url = Extra.url + "getJoke.php?do=submit&num=" + Extra.cJoke + "&type=" + type;
 		try {
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpGet httpget = new HttpGet(url);
@@ -119,19 +113,15 @@ public class JokeActivity extends Activity implements OnClickListener {
 				sb.append(line);
 			}
 			is.close();
-			System.out.println("Output::" + sb.toString());
 			if (!(sb.toString()).equals("[Form not submitted]")) {
-				System.out.println("inside");
 				array = new JSONArray(sb.toString());
-				cJoke = Integer.parseInt(array.getString(0));
+				Extra.cJoke = Integer.parseInt(array.getString(0));
 				totalJoke = Integer.parseInt(array.getString(2));
 				joke = array.getString(1).replace("%20", " ");
-			} else {
-				System.out.println("Phone is not registered");
-			}
+			} else
+				joke = "No joke to View";
 
 		} catch (Exception e) {
-			System.out.println("In Catch ");
 			e.printStackTrace();
 		}
 		return joke;

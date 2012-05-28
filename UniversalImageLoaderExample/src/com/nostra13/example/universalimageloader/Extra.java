@@ -10,5 +10,6 @@ public class Extra {
 	public static final String MY_AD_UNIT_ID = "MY_AD_UNIT_ID";
 	
 	public static String imageUrls[];
+	public static int cJoke = 0;
 	
 }

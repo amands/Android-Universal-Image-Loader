@@ -50,7 +50,6 @@ public class UploadActivity extends Activity {
 
 	private ProgressDialog dialog;
 	private String path = "";
-	// private SQLiteAdapter mySQLiteAdapter;
 	SimpleCursorAdapter cursorAdapter;
 	private ImageView image_view;
 	private Uri mImageCaptureUri;
@@ -75,9 +74,13 @@ public class UploadActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				dialog = ProgressDialog.show(UploadActivity.this, "Please wait",
-						"Uploading data...");
-				new GetData().execute("");
+				if (path.equals("")) {
+					Toast.makeText(UploadActivity.this, "No Image Selected, Please Select an image to upload", Toast.LENGTH_SHORT).show();
+				} else {
+					dialog = ProgressDialog.show(UploadActivity.this, "Please wait",
+							"Uploading data...");
+					new GetData().execute("");
+				}
 			}
 		});
 
@@ -146,7 +149,6 @@ public class UploadActivity extends Activity {
 			bitmap = BitmapFactory.decodeFile(path);
 
 		}
-		System.out.println("Path::" + path);
 		image_view.setImageBitmap(bitmap);
 	}
 
@@ -171,8 +173,6 @@ public class UploadActivity extends Activity {
 		@Override
 		protected String doInBackground(String... params) {
 
-			System.out.println("RegistrationScreen.GetData.doInBackground()");
-
 			HttpURLConnection connection = null;
 			DataOutputStream outputStream = null;
 
@@ -182,7 +182,6 @@ public class UploadActivity extends Activity {
 			String lineEnd = "\r\n";
 			String twoHyphens = "--";
 			String boundary = "*****";
-			String serverResponseMessage = "Upload Fail";
 
 			int bytesRead, bytesAvailable, bufferSize;
 			byte[] buffer;
@@ -190,7 +189,6 @@ public class UploadActivity extends Activity {
 
 			try {
 				FileInputStream fileInputStream = new FileInputStream(new File(pathToOurFile));
-				System.out.println("URL::" + urlServer);
 				URL url = new URL(urlServer);
 				connection = (HttpURLConnection) url.openConnection();
 
@@ -233,15 +231,8 @@ public class UploadActivity extends Activity {
 						connection.getInputStream()));
 
 				inputLine = in.readLine();
-				// while ((inputLine = in.readLine()) != null)
-				System.out.println(inputLine);
 				in.close();
 
-				int serverResponseCode = connection.getResponseCode();
-				serverResponseMessage = connection.getResponseMessage();
-
-				System.out.println("serverResponseCode::" + serverResponseCode
-						+ "::serverResponseMessage::" + serverResponseMessage);
 				fileInputStream.close();
 				outputStream.flush();
 				outputStream.close();
@@ -262,7 +253,6 @@ public class UploadActivity extends Activity {
 			super.onPostExecute(result);
 
 			String url = Extra.url + "getImages.php?do=submit";
-			System.out.println("Splash screen URL::" + url);
 			try {
 				HttpClient httpclient = new DefaultHttpClient();
 				HttpGet httpget = new HttpGet(url);
@@ -278,26 +268,24 @@ public class UploadActivity extends Activity {
 					sb.append(line);
 				}
 				is.close();
-				System.out.println("Output::" + sb.toString());
 				if (!(sb.toString()).equals("[Form not submitted]")) {
 					JSONArray array = new JSONArray(sb.toString());
 					Extra.imageUrls = new String[array.length()];
 					for (int i = 0; i < array.length(); i++) {
 						Extra.imageUrls[i] = array.getString(i);
 					}
+					Toast.makeText(UploadActivity.this, "Image Added Successfully.....",
+							Toast.LENGTH_SHORT).show();
 				} else {
-					System.out.println("Phone is not registered");
+					Toast.makeText(UploadActivity.this, "Some Error Occured Please try again",
+							Toast.LENGTH_SHORT);
 				}
 
 			} catch (Exception e) {
-				System.out.println("In Catch ");
 				e.printStackTrace();
 			}
 
-			Toast.makeText(UploadActivity.this, "Image Added Successfully.....",
-					Toast.LENGTH_SHORT).show();
 			dialog.dismiss();
-			System.out.println("Result from server::" + inputLine);
 
 			startActivity(new Intent(UploadActivity.this, ImageGridActivity.class));
 			finish();

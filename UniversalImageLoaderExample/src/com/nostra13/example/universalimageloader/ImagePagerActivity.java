@@ -8,7 +8,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -48,7 +47,6 @@ public class ImagePagerActivity extends BaseActivity implements OnClickListener 
 	private int pagerPosition;
 	private String[] imageUrls;
 	private DisplayImageOptions options;
-	private ProgressDialog dialog;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -165,7 +163,6 @@ public class ImagePagerActivity extends BaseActivity implements OnClickListener 
 		try {
 			myFileUrl = new URL(fileUrl);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
@@ -176,9 +173,7 @@ public class ImagePagerActivity extends BaseActivity implements OnClickListener 
 			Log.i("im connected", "Download");
 			bmImg = BitmapFactory.decodeStream(is);
 			saveImage();
-			// imView.setImageBitmap(bmImg);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -209,8 +204,6 @@ public class ImagePagerActivity extends BaseActivity implements OnClickListener 
 
 	@Override
 	public void onClick(View v) {
-		dialog = ProgressDialog.show(this, "Loading Images From Server....", "Please wait",
-				true, false);
 		switch (v.getId()) {
 
 		case R.id.btnIpBack:
@@ -218,11 +211,12 @@ public class ImagePagerActivity extends BaseActivity implements OnClickListener 
 			break;
 
 		case R.id.btnIpSave:
-
 			downloadFile(imageUrls[pagerPosition]);
+
 			break;
 		case R.id.btnIpPublish:
 			downloadFile(imageUrls[pagerPosition]);
+
 			Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory()
 					.toString() + "/UniversalImages/" + pagerPosition + ".jpg"));
 			Intent i = new Intent(Intent.ACTION_SEND);
@@ -230,28 +224,22 @@ public class ImagePagerActivity extends BaseActivity implements OnClickListener 
 			i.putExtra(Intent.EXTRA_TEXT, "Content");
 			i.putExtra(Intent.EXTRA_STREAM, uri);
 			i.setType("text/plain");
+
 			startActivity(Intent.createChooser(i, "Send mail"));
 
 			break;
 		case R.id.btnIpNext:
 			pager.setAdapter(new ImagePagerAdapter(imageUrls));
-			System.out.println(pagerPosition + ":+:"
-					+ (pagerPosition >= imageUrls.length - 1 ? pagerPosition : pagerPosition + 1));
-
 			pager.setCurrentItem(pagerPosition >= imageUrls.length - 1 ? pagerPosition
 					: ++pagerPosition);
 			break;
 
 		case R.id.btnIpPrev:
 			pager.setAdapter(new ImagePagerAdapter(imageUrls));
-			System.out.println(pagerPosition + ":+:"
-					+ (pagerPosition >= imageUrls.length - 1 ? pagerPosition : pagerPosition + 1));
 			pager.setCurrentItem(pagerPosition < 1 ? pagerPosition : --pagerPosition);
 			break;
 
 		}
-
-		dialog.dismiss();
 
 	}
 }

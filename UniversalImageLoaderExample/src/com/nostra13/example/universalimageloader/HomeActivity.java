@@ -76,10 +76,7 @@ public class HomeActivity extends BaseActivity {
 
 		@Override
 		protected String doInBackground(String... params) {
-			System.out.println("HomeActivity.GetData.doInBackground()");
-
 			String url = Extra.url + "getImages.php?do=submit";
-			System.out.println("Splash screen URL::" + url);
 			try {
 				HttpClient httpclient = new DefaultHttpClient();
 				HttpGet httpget = new HttpGet(url);
@@ -95,7 +92,6 @@ public class HomeActivity extends BaseActivity {
 					sb.append(line);
 				}
 				is.close();
-				System.out.println("Output::" + sb.toString());
 				if (!(sb.toString()).equals("[Form not submitted]")) {
 					array = new JSONArray(sb.toString());
 					Extra.imageUrls = new String[array.length()];
@@ -103,11 +99,9 @@ public class HomeActivity extends BaseActivity {
 						Extra.imageUrls[i] = array.getString(i);
 					}
 				} else {
-					System.out.println("Phone is not registered");
 				}
 				
 			} catch (Exception e) {
-				System.out.println("In Catch ");
 				e.printStackTrace();
 			}
 			return "";

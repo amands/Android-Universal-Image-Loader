@@ -36,8 +36,9 @@ public class ImageGridActivity extends BaseActivity implements OnClickListener {
 	private int pos = 1;
 
 	private DisplayImageOptions options;
-	
+
 	private SharedPreferences settings;
+	private Editor editor;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,14 +57,26 @@ public class ImageGridActivity extends BaseActivity implements OnClickListener {
 		btnUpload = (ImageButton) findViewById(R.id.btnIgUpload);
 
 		showUrls = new String[maxImages];
-		
+
 		settings = getPreferences(0);
+		editor = settings.edit();
+		
 		pos = settings.getInt("pos", 1);
 
+
 		for (int i = (pos - 1) * maxImages, j = 0; i < maxImages * pos; i++, j++) {
+
 			try {
 				showUrls[j] = Extra.imageUrls[i];
 			} catch (Exception e) {
+				if ((j == 0) && (i % 9 == 0)) {
+					pos = 1;
+					
+					editor.putInt("pos", 1);
+					editor.commit();
+					btnPrev.performClick();
+				}
+				e.printStackTrace();
 				showUrls[j] = "";
 			}
 		}
@@ -125,7 +138,6 @@ public class ImageGridActivity extends BaseActivity implements OnClickListener {
 
 			imageLoader.displayImage(showUrls[position], imageView, options);
 
-			System.out.println(position + ":Image::" + Extra.imageUrls[position]);
 			return imageView;
 		}
 	}
@@ -145,6 +157,8 @@ public class ImageGridActivity extends BaseActivity implements OnClickListener {
 				} catch (Exception e) {
 					showUrls[j] = "";
 				}
+				editor.putInt("pos", pos);
+				editor.commit();
 
 			}
 
@@ -161,19 +175,19 @@ public class ImageGridActivity extends BaseActivity implements OnClickListener {
 					showUrls[j] = "";
 				}
 			}
+			editor.putInt("pos", pos);
+			editor.commit();
 			gridView.setAdapter(new ImageAdapter());
 			break;
 		case R.id.btnIgUpload:
-			Editor editor = settings.edit();
 			editor.putInt("pos", pos);
 			editor.commit();
-			
+
 			Intent intent = new Intent(ImageGridActivity.this, UploadActivity.class);
 			startActivity(intent);
 			break;
 		}
 
 	}
-	
-	
+
 }
